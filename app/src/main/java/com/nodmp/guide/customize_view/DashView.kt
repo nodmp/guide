@@ -8,8 +8,8 @@ import android.view.View
 class DashView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     companion object{
         private val ANGLE = 120
-        private val RADIUS = Utils.dp2dx(80f)
-        private val LENGTH = Utils.dp2dx(60f)
+        private val RADIUS = Utils.dp2dx(60f)
+        private val LENGTH = Utils.dp2dx(40f)
 
     }
     var paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -73,11 +73,11 @@ class DashView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
             paint
 
         )
-        paint.style= Paint.Style.FILL
-        paint.strokeWidth = 10f
-        paint.color = Color.BLUE
-        paint.strokeCap = Paint.Cap.ROUND
-        canvas?.drawPoint(width / 2f, height / 2f, paint)
+//        paint.style= Paint.Style.FILL
+//        paint.strokeWidth = 10f
+//        paint.color = Color.BLUE
+//        paint.strokeCap = Paint.Cap.ROUND
+//        canvas?.drawPoint(width / 2f, height / 2f, paint)
     }
     fun getAngleFromMark(mark: Int): Int {
         return 90 + ANGLE / 2 + (360 - ANGLE) / 20 * mark
