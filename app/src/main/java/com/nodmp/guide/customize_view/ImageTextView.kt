@@ -2,6 +2,7 @@ package com.nodmp.guide.customize_view
 
 import android.content.Context
 import android.graphics.*
+import android.os.Build
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
@@ -63,7 +64,19 @@ class ImageTextView(context: Context?, attrs: AttributeSet?) : View(context, att
         canvas?.drawBitmap(bitmap, width - Utils.dp2dx(82f), 100f, paint)
         var int = paint.breakText(str, true, width.toFloat(), floatArray)
         canvas?.drawText(str, 0, int, 0f, 50f, paint)
-        canvas?.drawText(str, 0, int, 0f, 50f + paint.fontSpacing, paint)
+        canvas?.drawText(str, int, 2 * int, 0f, 50f + paint.fontSpacing, paint)
+        var int1 = paint.breakText(str, true, width - Utils.dp2dx(80f), floatArray)
+        canvas?.drawText(str, 2 * int, 2 * int + int1, 0f, 50f + paint.fontSpacing * 2, paint)
+        canvas?.drawText(str, 2 * int, 2 * int + int1, 0f, 50f + paint.fontSpacing * 3, paint)
+        canvas?.drawText(str, 2 * int, 2 * int + int1, 0f, 50f + paint.fontSpacing * 4, paint)
+        canvas?.drawText(str, 2 * int, 2 * int + int1, 0f, 50f + paint.fontSpacing * 5, paint)
+        canvas?.drawText(str, 2 * int, 2 * int + int1, 0f, 50f + paint.fontSpacing * 6, paint)
+        canvas?.drawText(str, 2 * int, 2 * int + int1, 0f, 50f + paint.fontSpacing * 7, paint)
+        canvas?.drawText(str, 2 * int, 3 * int, 0f, 50f + paint.fontSpacing * 8, paint)
+        canvas?.drawText(str, 2 * int, 3 * int, 0f, 50f + paint.fontSpacing * 9, paint)
+        canvas?.drawText(str, 2 * int, 3 * int, 0f, 50f + paint.fontSpacing * 10, paint)
+        canvas?.drawText(str, 2 * int, 3 * int, 0f, 50f + paint.fontSpacing * 11, paint)
+        canvas?.drawText(str, 2 * int, 3 * int, 0f, 50f + paint.fontSpacing * 12, paint)
 
 
     }
