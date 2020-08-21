@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.TypedValue
+import androidx.annotation.IdRes
 import com.nodmp.guide.R
 
 object Utils {
@@ -36,11 +37,21 @@ object Utils {
     fun getAvatar(resources:Resources,width: Int): Bitmap {
         var options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resources, R.drawable.timg, options)
+        BitmapFactory.decodeResource(resources, R.drawable.googlemaps, options)
         options.inJustDecodeBounds = false
         options.inDensity = options.outWidth
         options.inTargetDensity = width
-        return BitmapFactory.decodeResource(resources, R.drawable.timg, options)
+        return BitmapFactory.decodeResource(resources, R.drawable.googlemaps, options)
+    }
+    fun getAvatar(resources: Resources, width: Int, id: Int): Bitmap {
+        var options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeResource(resources, id, options)
+        options.inJustDecodeBounds = false
+        options.inDensity = options.outWidth
+        options.inTargetDensity = width
+        return BitmapFactory.decodeResource(resources, id, options)
+
     }
 
 }

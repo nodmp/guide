@@ -13,28 +13,78 @@ import androidx.annotation.RequiresApi
 class CameraView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     var paint = Paint(Paint.ANTI_ALIAS_FLAG)
     var camera = Camera()
+    var bitmap = Utils.getAvatar(resources, IMAGE_WIDTH.toInt())
+
+    var rotate: Float = 0f
+        get() = field
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var topX: Float = 0f
+        get() = field
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var bottomX: Float = 0f
+        get() = field
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+
+    companion object {
+        @JvmField val PADDING = Utils.dp2dx(100f)
+        @JvmField
+        val IMAGE_WIDTH = Utils.dp2dx(200f)
+    }
 
     init {
-        camera.rotateX(45f)
-//        camera.setLocation(0f, 0f, -6 * resources.displayMetrics.density)
+        camera.setLocation(0f, 0f, -8 * resources.displayMetrics.density)
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        var path = Path() //Path-:
+        ///Shape Top
         canvas?.save()
-//        canvas?.clipRect(0f, 0f, width.toFloat(), 150 + Utils.dp2dx(80f) / 2)
-        canvas?.drawBitmap(Utils.getAvatar(resources, Utils.dp2dx(80f).toInt()), 150f, 150f, paint)
-        canvas?.restore()
-        /////todo
-        canvas?.save()
-        canvas?.translate(150 + Utils.dp2dx(80f) / 2, 150 + Utils.dp2dx(80f))
+        canvas?.translate(width / 2f, height / 2f)
+        canvas?.rotate(-rotate)
+        camera.save()
+        camera.rotateX(topX)
         camera.applyToCanvas(canvas)
-        canvas?.clipRect(-Utils.dp2dx(80f)/2, 0f,  Utils.dp2dx(80f)/2,  Utils.dp2dx(80f)/2)
-        canvas?.translate(-150f - (Utils.dp2dx(80f) / 2), -150f - (Utils.dp2dx(80f) / 2))
-        canvas?.drawBitmap(Utils.getAvatar(resources, Utils.dp2dx(80f).toInt()), 150f, 150f, paint)
+        camera.restore()
+        canvas?.clipRect(-width / 2f, -height / 2f, width / 2f, 0f)
+        canvas?.rotate(rotate)
+        canvas?.translate(-width / 2f, -height / 2f)
+        canvas?.drawBitmap(
+            bitmap,
+            (width - bitmap.width) / 2f,
+            (height - bitmap.height) / 2f,
+            paint
+        )
         canvas?.restore()
-//        canvas?.clipRect(0f, 150 + Utils.dp2dx(80f) / 2, width.toFloat(), height.toFloat())
-//        canvas?.drawBitmap(Utils.getAvatar(resources, Utils.dp2dx(80f).toInt()), 150f, 150f, paint)
+
+        //Shape bottom
+        canvas?.save()
+        canvas?.translate(width / 2f, height / 2f)
+        canvas?.rotate(-rotate)
+        camera.save()
+        camera.rotateX(bottomX)
+        camera.applyToCanvas(canvas)
+        camera.restore()
+        canvas?.clipRect(-width / 2f, 0f, width / 2f, height / 2f)
+        canvas?.rotate(rotate)
+        canvas?.translate(-width / 2f, -height / 2f)
+        canvas?.drawBitmap(
+            bitmap,
+            (width - bitmap.width) / 2f,
+            (height - bitmap.height) / 2f,
+            paint
+        )
+        canvas?.restore()
+
     }
 }
